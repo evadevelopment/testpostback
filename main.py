@@ -22,6 +22,7 @@ async def handle_postback(
     order_id: Optional[str] = Form(None),
     token: Optional[str] = Form(None)
 ):
+    print(status, invoice_id, amount_crypto, currency, order_id, token)
     try:
         if token:
             # decoded = jwt.decode(token, secret_key, algorithms=['HS256'])
@@ -36,5 +37,5 @@ async def handle_postback(
                    f"Decoded: {decoded}\n")
 
         return {"message": "Postback received"}
-    except jwt.InvalidTokenError:
+    except Exception:
         raise HTTPException(status_code=401, detail="Invalid token")
